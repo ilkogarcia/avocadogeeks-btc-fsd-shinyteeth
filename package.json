@@ -1,0 +1,21 @@
+{
+  "name": "avocadogeeks-btc-fsd-shinyteeth",
+  "version": "1.0.0",
+  "description": "API REST for \"Shiny Teeth\" dental clinic. Made by Avocado Geeks",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth/issues"
+  },
+  "homepage": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth#readme"
+}
