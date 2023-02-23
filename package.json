@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth/issues"
   },
-  "homepage": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth#readme"
+  "homepage": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth#readme",
+  "dependencies": {
+    "express": "4.18.2"
+  }
 }
