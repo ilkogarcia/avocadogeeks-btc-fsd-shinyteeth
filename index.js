@@ -1,20 +1,19 @@
-// Importamos la libreria de Express
-const express = require('express');
+// Import and configure express using commonjs
+const express = require('express');     // Express package import
+const server = express();               // Create an instance of the express class
 
-// Instanciamos una clase de Express en una variable
-const server = express(); 
+// Import and configure dotenv using commonjs
+require('dotenv').config()              // Require and configure dotenv package 
 
-// Declaramos el uso de JSON para procesar el body en peticiones recibidas
+// Using JSON to process the body in received requests
 server.use(express.json());
 
-// Importamos las rutas de nuestra API
+// Import routes defined in our API interface
 const routes = require('./routes');
 server.use('/api', routes); 
 
-// Variable donde almacenamos el puerto donde correrá el servicio
-const PORT = 3000;
-
-// Asigno un puerto a la conexión y mediante un callback le indico que me avise cuando se haya realizado.
+// Assign port to connection and a callback function that warns me when the service is live
+const PORT = process.env.PORT;          // Rescue environment variable for port where the service must run
 server.listen(PORT, () => {
     console.log(`Server is live at localhost: ${PORT}`)
 });
