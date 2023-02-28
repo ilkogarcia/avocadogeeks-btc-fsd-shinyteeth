@@ -9,11 +9,12 @@ require("dotenv").config(); // Require and configure dotenv package
 server.use(express.json());
 
 // Import routes defined in our API interface
-const routes = require("./routes");
+const routes = require("./routes.js");
 server.use("/api", routes);
 
-// Assign port to connection and a callback function that warns me when the service is live
+const db = require("./db.js");
 const PORT = process.env.PORT; // Rescue environment variable for port where the service must run
-server.listen(PORT, () => {
-  console.log(`Server is live at localhost: ${PORT}`);
-});
+db.then(() => {
+    server.listen(PORT, () => console.log(`Application is listening at port ${PORT}`));
+    })
+  .catch((err) => console.log(err.message));
