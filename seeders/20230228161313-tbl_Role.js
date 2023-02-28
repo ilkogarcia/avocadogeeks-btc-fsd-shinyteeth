@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('tbl_Role', [
+    await queryInterface.bulkInsert('tbl_Roles', [
       {title: "Invitado", createdAt: new Date(), updatedAt: new Date()},
       {title: "Paciente", createdAt: new Date(), updatedAt: new Date()},
       {title: "Profesional", createdAt: new Date(), updatedAt: new Date()},
