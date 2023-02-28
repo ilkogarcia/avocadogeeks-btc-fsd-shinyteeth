@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('tbl_Users', {
       id: {
         allowNull: false,
@@ -12,22 +12,22 @@ module.exports = {
       role_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_Roles",
-          key: "id"
+          model: 'tbl_Roles',
+          key: 'id'
         }
       },
       patient_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_Patients",
-          key: "id"
+          model: 'tbl_Patients',
+          key: 'id'
         }
       },
       professional_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_Professionals",
-          key: "id"
+          model: 'tbl_Professionals',
+          key: 'id'
         }
       },
       first_name: {
@@ -59,9 +59,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tbl_Users');
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('tbl_Users')
   }
-};
+}

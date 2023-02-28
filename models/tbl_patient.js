@@ -1,7 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+/* eslint-disable camelcase */
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class tbl_Patient extends Model {
     /**
@@ -9,16 +8,17 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate (models) {
       // define association here
-      tbl_Patient.belongsTo(models.tbl_User);
+      tbl_Patient.belongsTo(models.tbl_User)
     }
   }
+
   tbl_Patient.init({
     ehr_number: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'tbl_Patient',
-  });
-  return tbl_Patient;
-};
+    modelName: 'tbl_Patient'
+  })
+  return tbl_Patient
+}

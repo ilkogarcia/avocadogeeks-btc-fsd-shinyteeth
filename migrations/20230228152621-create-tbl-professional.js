@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('tbl_Professionals', {
       id: {
         allowNull: false,
@@ -12,8 +12,8 @@ module.exports = {
       specialties_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_DentalSpecialties",
-          key: "id"
+          model: 'tbl_DentalSpecialties',
+          key: 'id'
         }
       },
       createdAt: {
@@ -24,9 +24,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tbl_Professionals');
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('tbl_Professionals')
   }
-};
+}
