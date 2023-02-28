@@ -12,21 +12,21 @@ module.exports = {
       role_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_Role",
+          model: "tbl_Roles",
           key: "id"
         }
       },
       patient_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_Patient",
+          model: "tbl_Patients",
           key: "id"
         }
       },
       professional_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "tbl_Professional",
+          model: "tbl_Professionals",
           key: "id"
         }
       },
