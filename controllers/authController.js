@@ -23,6 +23,20 @@ module.exports = class AuthCtrl {
 
   // Authentication API: SignIn
   static async apiSignIn (req, res) {
-    return res.status(200).json('¡Estas iniciando sesión con tu usuario!')
+    try {
+      const { email, password } = req.body
+      const user = await tbl_User.findOne({ where: { email } })
+      if (!user) {
+        return res.send('Something has gone wrong!. Try again')
+      } else {
+        const isMatch = bcrypt.compareSync(password, user.password_hash)
+        if (!isMatch) {
+          return res.send('Something has gone wrong!. Try again')
+        }
+      }
+      return res.status(200).send('Login success. Access granted!!!')
+    } catch (error) {
+      return res.status(500).send(error.message)
+    }
   }
 }
