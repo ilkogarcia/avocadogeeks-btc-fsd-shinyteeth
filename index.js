@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-// Import and configure express using commonjs
+// Import Express using commonjs
 const express = require('express')
 const server = express() // Create an instance of the express class
 
@@ -13,8 +13,9 @@ server.use(express.json())
 const routes = require('./routes.js')
 server.use('/api', routes)
 
+// Initializing connection to DB
 const db = require('./db.js')
-const PORT = process.env.PORT // Rescue environment variable for port where the service must run
+const PORT = process.env.PORT || 3000
 
 db.then(() => {
   server.listen(PORT, () => console.log(`Application is listening at port ${PORT}`))
