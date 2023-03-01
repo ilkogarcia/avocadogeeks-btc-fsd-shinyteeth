@@ -28,6 +28,20 @@ module.exports = class DentSpeCtrl {
     }
   }
 
+  // CRUD: (R) Retrive DentalSpecialties data from database. The user ID received in request parameter
+  static async apiGetDentalSpecById (req, res) {
+    try {
+      const response = await tbl_DentalSpecialties.findByPk(req.params.id)
+      if (!response) {
+        return res.status(404).json('¡Este usuarios no existe en la base de datos!')
+      } else {
+        return res.json(response)
+      }
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  }
+
   // Testing Method
   static async apiGetAllDentSpec (req, res) {
     try {
