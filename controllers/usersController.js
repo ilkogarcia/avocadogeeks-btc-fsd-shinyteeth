@@ -6,7 +6,7 @@ module.exports = class UserCtrl {
   // CRUD: (C) Create a new user record in the database. Data passed in body request
   static async apiAddUser (req, res) {
     try {
-      const newUserData = {
+      const newUser = {
         role_id: req.body.role_id,
         patient_id: req.body.patient_id,
         professional_id: req.body.professional_id,
@@ -17,7 +17,7 @@ module.exports = class UserCtrl {
         email: req.body.email,
         password_hash: req.body.password_hash
       }
-      const response = await tbl_User.create(newUserData)
+      const response = await tbl_User.create(newUser)
       return res.json(response)
     } catch (error) {
       return res.status(500).json({ error })

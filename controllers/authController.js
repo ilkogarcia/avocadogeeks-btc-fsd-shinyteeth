@@ -8,7 +8,17 @@ const { tbl_User } = require('../models/index')
 module.exports = class AuthCtrl {
   // Authentication API: SignUp
   static async apiSignUp (req, res) {
-    return res.status(200).json('¡Estas registrandote como usuario!')
+    try {
+      const { email, password } = req.body
+      const password_hash = bcrypt.hashSync(password, 10)
+      const response = await tbl_User.create({
+        email,
+        password_hash
+      })
+      return res.json(response)
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
   }
 
   // Authentication API: SignIn
