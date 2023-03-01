@@ -16,7 +16,17 @@ module.exports = class DentSpeCtrl {
   }
 
   // CRUD: (U) Update a DentalSpecialties record in the database. Data passed in body request
-
+  static async apiUpdateDentSpec (req, res) {
+    try {
+      const response = await tbl_DentalSpecialties.update({
+        name: req.body.name,
+        description: req.body.description
+      }, { where: { id: req.params.id } })
+      return res.json(response)
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  }
 
   // Testing Method
   static async apiGetAllDentSpec (req, res) {
