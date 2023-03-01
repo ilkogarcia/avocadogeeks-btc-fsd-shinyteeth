@@ -9,4 +9,8 @@ router.get('/', (req, res) => res.send('Welcome to Shiny Teeth'))
 const userRoutes = require('./routes/routes.users')
 router.use(userRoutes)
 
+// DentalSpecialties management API
+const dentSpecRoutes = require('./routes/routes.dentalspecialties')
+router.use(dentSpecRoutes)
+
 module.exports = router
