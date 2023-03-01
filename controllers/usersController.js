@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-// Importa el modelo Sequelize que usamos para gestionar la tabla Producto
+
+// Import Sequelize models used
 const { tbl_User } = require('../models/index')
 module.exports = class UserCtrl {
   // CRUD: (C) Create a new user record in the database. Data passed in body request
