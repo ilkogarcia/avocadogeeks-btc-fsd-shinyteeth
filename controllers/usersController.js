@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-// Import Sequelize models used
+const { Op } = require('sequelize')
 const { tbl_User } = require('../models/index')
 module.exports = class UserCtrl {
   // CRUD: (C) Create a new user record in the database. Data passed in body request
@@ -18,9 +18,18 @@ module.exports = class UserCtrl {
         password_hash: req.body.password_hash
       }
       const response = await tbl_User.create(newUser)
-      return res.json(response)
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'User added successfully!',
+        user: response.id
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
@@ -38,23 +47,46 @@ module.exports = class UserCtrl {
         email: req.body.email,
         password_hash: req.body.password_hash
       }, { where: { id: req.params.id } })
-      return res.json(response)
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'User updated successfully!',
+        user: response.id
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
   // CRUD: (R) Retrive user data from database. The user ID received in request parameter
   static async apiGetUserById (req, res) {
     try {
-      const response = await tbl_User.findByPk(req.params.id)
+      const response = await tbl_User.findByPk(req.params.id, {
+        attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt']
+      })
+
       if (!response) {
-        return res.status(404).json('¡Este usuarios no existe en la base de datos!')
-      } else {
-        return res.json(response)
+        return res.status(404).json({
+          sucess: false,
+          message: 'User does not exist in database!'
+        })
       }
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'User retrieved successfully!',
+        user: response
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
@@ -63,26 +95,51 @@ module.exports = class UserCtrl {
     try {
       const response = await tbl_User.destroy({ where: { id: req.params.id } })
       if (!response) {
-        return res.status(404).json('¡Este usuarios no existe en la base de datos!')
-      } else {
-        return res.json(response)
+        return res.status(404).json({
+          sucess: false,
+          message: 'User does not exist in database!'
+        })
       }
+      return res.status(201).json({
+        sucess: true,
+        message: 'User deleted successfully!'
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
   // This method is available only in the backend and for users with administration privileges
   static async apiGetAllUsers (req, res) {
     try {
-      const usersList = await tbl_User.findAll()
-      if (!usersList) {
-        return res.status(404).json('¡No existen usuarios en la base de datos!')
-      } else {
-        return res.json(usersList)
+      const response = await tbl_User.findAll({
+        order: [['id', 'DESC']],
+        attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt'],
+        where: { role_id: { [Op.ne]: 4 } }
+      })
+
+      if (!response) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'There are no registered users at this time!'
+        })
       }
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Some users info recovered successfully!',
+        user_list: response
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 }

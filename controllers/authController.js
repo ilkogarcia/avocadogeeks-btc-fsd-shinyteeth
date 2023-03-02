@@ -27,7 +27,10 @@ module.exports = class AuthCtrl {
       })
 
       if (!user) {
-        return res.status(400).json({ message: 'Something has gone wrong!' })
+        return res.status(400).json({
+          sucess: false,
+          message: 'Something has gone wrong!'
+        })
       }
 
       // Put together the answer that we are going to return
@@ -54,11 +57,17 @@ module.exports = class AuthCtrl {
       // Find user with requested email
       const user = await tbl_User.findOne({ where: { email } })
       if (!user) {
-        return res.status(400).json({ message: 'Something has gone wrong!. Try again' })
+        return res.status(400).json({
+          sucess: false,
+          message: 'Something has gone wrong!'
+        })
       } else {
         const isMatch = bcrypt.compareSync(password, user.password_hash)
         if (!isMatch) {
-          return res.status(400).json({ message: 'Something has gone wrong!. Try again' })
+          return res.status(400).json({
+            sucess: false,
+            message: 'Something has gone wrong!'
+          })
         }
       }
 
