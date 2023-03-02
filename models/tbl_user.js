@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       })
 
-      tbl_User.hasOne(models.tbl_Patient, {
+      tbl_User.belongsTo(models.tbl_Patient, {
         foreignKey: 'id'
       })
 
