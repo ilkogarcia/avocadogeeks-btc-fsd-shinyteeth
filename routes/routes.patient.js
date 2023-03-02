@@ -7,12 +7,12 @@ const PatientCtrl = require('../controllers/patientsControllers')
 
 // Import middleware functions
 const verifyToken = require('../middlewares/verifyToken')
-const isPatient = require('../middlewares/isPatient')
+const isProfessional = require('../middlewares/isProfessional')
 
-router.post('/patient', verifyToken, PatientCtrl.apiAddPatient)
-router.get('/patient/:id', verifyToken, isPatient, PatientCtrl.apiGetPatientById)
-router.put('/patient/:id', verifyToken, PatientCtrl.apiUpdatePatient)
-router.delete('/patient/:id', verifyToken, PatientCtrl.apiDeletePatient)
-router.get('/patient', verifyToken, PatientCtrl.apiGetAllPatient)
+router.post('/patient', verifyToken, isProfessional, PatientCtrl.apiAddPatient)
+router.get('/patient/:id', verifyToken, PatientCtrl.apiGetPatientById)
+router.put('/patient/:id', verifyToken, isProfessional, PatientCtrl.apiUpdatePatient)
+router.delete('/patient/:id', verifyToken, isProfessional, PatientCtrl.apiDeletePatient)
+router.get('/patient', verifyToken, isProfessional, PatientCtrl.apiGetAllPatient)
 
 module.exports = router
