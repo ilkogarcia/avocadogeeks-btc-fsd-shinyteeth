@@ -12,7 +12,7 @@ const { tbl_User } = require('../models')
 // Function that checks if token belongs to a user that also is patient
 const isProfessional = async (req, res, next) => {
   try {
-    // Request will be denied if user does not have a patient role
+    // Request will be denied if user does not have a professional role
     if (req.roleId !== 3) {
       return res.status(401).json({
         sucess: false,
@@ -41,7 +41,7 @@ const isProfessional = async (req, res, next) => {
       })
     }
 
-    // If everything has gone well we add patient ID to the request
+    // If everything has gone well we add professional ID to the request
     req.professionalID = response.professional_id
 
     next()
