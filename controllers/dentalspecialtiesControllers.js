@@ -9,9 +9,18 @@ module.exports = class DentSpeCtrl {
         description: req.body.description
       }
       const response = await tbl_DentalSpecialties.create(newDentSpecData)
-      return res.json(response)
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Dental Specialitie added successfully!',
+        user: response.id
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
@@ -22,23 +31,45 @@ module.exports = class DentSpeCtrl {
         name: req.body.name,
         description: req.body.description
       }, { where: { id: req.params.id } })
-      return res.json(response)
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Dental Specialties updated successfully!',
+        user: response.id
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
   // CRUD: (R) Retrive DentalSpecialties data from database. The user ID received in request parameter
   static async apiGetDentSpecById (req, res) {
     try {
-      const response = await tbl_DentalSpecialties.findByPk(req.params.id)
+      const response = await tbl_DentalSpecialties.findByPk(req.params.id, {
+        attributes: ['id', 'name', 'description']
+      })
       if (!response) {
-        return res.status(404).json('¡No existe esa especialidad en la base de datos!')
-      } else {
-        return res.json(response)
+        return res.status(404).json({
+          sucess: false,
+          message: 'Dental Specialtie does not exist in database!'
+        })
       }
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Dental Specialtie retrieved successfully!',
+        DentalSpecialtie: response
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
@@ -47,21 +78,35 @@ module.exports = class DentSpeCtrl {
     try {
       const response = await tbl_DentalSpecialties.destroy({ where: { id: req.params.id } })
       if (!response) {
-        return res.status(404).json('¡No existe esa especialidad en la base de datos!')
-      } else {
-        return res.json(response)
+        return res.status(404).json({
+          sucess: false,
+          message: 'Dental Specialtie does not exist in database!'
+        })
       }
+      return res.status(201).json({
+        sucess: true,
+        message: 'Dental Specialtie deleted successfully!'
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
   // Testing Method
   static async apiGetAllDentSpec (req, res) {
     try {
-      const dentSpecList = await tbl_DentalSpecialties.findAll()
+      const dentSpecList = await tbl_DentalSpecialties.findAll({
+        attributes: ['id', 'name', 'description']
+      })
       if (!dentSpecList) {
-        return res.status(404).json('¡No existe esa especialidad en la base de datos!')
+        return res.status(404).json({
+          sucess: false,
+          message: 'Something has gone wrong!'
+        })
       } else {
         return res.json(dentSpecList)
       }
