@@ -9,7 +9,10 @@ const PatientCtrl = require('../controllers/patientsControllers')
 const verifyToken = require('../middlewares/verifyToken')
 const isPatient = require('../middlewares/isPatient')
 
-// router.post('/patient', PatientCtrl.apiAddPatient)
-router.get('/patient', verifyToken, isPatient, PatientCtrl.apiGetAllPatient)
+router.post('/patient', verifyToken, PatientCtrl.apiAddPatient)
+router.get('/patient/:id', verifyToken, PatientCtrl.apiGetPatientById)
+router.put('/patient/:id', verifyToken, PatientCtrl.apiUpdatePatient)
+router.delete('/patient/:id', verifyToken, PatientCtrl.apiDeletePatient)
+router.get('/patient', verifyToken, verifyToken, isPatient, PatientCtrl.apiGetAllPatient)
 
 module.exports = router
