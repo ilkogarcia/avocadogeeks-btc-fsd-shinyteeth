@@ -13,4 +13,12 @@ router.use(authRoutes)
 const userRoutes = require('./routes/routes.users')
 router.use(userRoutes)
 
+// DentalSpecialties management API
+const dentSpecRoutes = require('./routes/routes.dentalspecialties')
+router.use(dentSpecRoutes)
+
+// Patient management API
+const patientRoutes = require('./routes/routes.patient')
+router.use(patientRoutes)
+
 module.exports = router

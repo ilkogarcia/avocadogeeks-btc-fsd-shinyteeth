@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       // define association here
-      tbl_Patient.belongsTo(models.tbl_User)
+      tbl_Patient.hasOne(models.tbl_User, {
+        foreignKey: 'id'
+      })
     }
   }
 
