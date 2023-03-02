@@ -30,15 +30,18 @@ module.exports = class AuthCtrl {
         return res.status(400).json({ message: 'Something has gone wrong!' })
       }
 
-      // We put together the answer that we are going to return
-      const response = {
-        message: 'User signup successfully!',
-        userId: user.id
-      }
-
-      return res.status(201).json({ response })
+      // Put together the answer that we are going to return
+      return res.status(201).json({
+        sucess: true,
+        message: 'Signup successfully!',
+        user: user.id
+      })
     } catch (error) {
-      return res.status(500).json({ error })
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 
@@ -70,16 +73,17 @@ module.exports = class AuthCtrl {
         { expiresIn: '1h' }
       )
 
-      // We put together the answer that we are going to return
-      const response = {
+      return res.status(201).json({
+        sucess: true,
         message: 'Access granted!',
-        userID: user.id,
-        sessionToken: token
-      }
-
-      return res.status(201).json({ response })
+        token
+      })
     } catch (error) {
-      return res.status(500).send(error.message)
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
     }
   }
 }
