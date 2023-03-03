@@ -1,6 +1,6 @@
 /*
-* Patient API Endpoints. This gateway allows you to connect any client
-* application with the Patient management processes implemented in the
+* Professional API Endpoints. This gateway allows you to connect any client
+* application with the Profesional management processes implemented in the
 * backend of our application.
 */
 
@@ -9,12 +9,12 @@ const express = require('express')
 const router = express.Router()
 
 // Import Patient controller
-const PatientCtrl = require('../controllers/patientsControllers')
+const ProfessionalCtrl = require('../controllers/professionalsController')
 
 // Import middleware functions
 const verifyToken = require('../middlewares/verifyToken')
-const isProfessional = require('../middlewares/isProfessional')
 const isAdmin = require('../middlewares/isAdmin')
+const hasPrivileges = require('../middlewares/hasPrivileges')
 
 /*
 * Endpoints. format: router.<Http-Method>(<URL:id>, <Middleware1>...<MiddlewareN>, <Controller> )
@@ -25,11 +25,10 @@ const isAdmin = require('../middlewares/isAdmin')
 * <Controller> Refers to the name of the route method in the controller. Most indicate purpose
 * details what each route is responsible for.
 */
-
-router.post('/api/patient', verifyToken, isProfessional, PatientCtrl.apiAddPatient)
-router.get('/api/patient/:id', verifyToken, PatientCtrl.apiGetPatientById)
-router.put('/api/patient/:id', verifyToken, isProfessional, PatientCtrl.apiUpdatePatient)
-router.delete('/api/patient/:id', verifyToken, isAdmin, PatientCtrl.apiDeletePatient)
-router.get('/api/patient', verifyToken, isAdmin, PatientCtrl.apiGetAllPatient)
+router.post('/api/professionals', verifyToken, ProfessionalCtrl.apiAddProfessional)
+router.get('/api/professionals/:id', verifyToken, hasPrivileges, ProfessionalCtrl.apiGetProfessionalById)
+router.put('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiUpdateProfessional)
+router.delete('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiDeleteProfessional)
+router.get('/api/professionals', verifyToken, ProfessionalCtrl.apiGetAllProfessionals)
 
 module.exports = router

@@ -1,7 +1,16 @@
+/*
+* UserCtrl is a controller class that is responsible for processing
+* the HTTP requests received at the Users RESTful endpoints from our API
+* and returns the responses to the client in JSON format.
+*/
+
 /* eslint-disable camelcase */
 
+// Section where we declare the necessary imports for this module
 const { Op } = require('sequelize')
 const { tbl_User } = require('../models/index')
+
+// Controller class UserCtrl
 module.exports = class UserCtrl {
   // CRUD: (C) Create a new user record in the database. Data passed in body request
   static async apiAddUser (req, res) {

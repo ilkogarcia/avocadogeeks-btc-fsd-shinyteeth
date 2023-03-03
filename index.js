@@ -1,17 +1,22 @@
+/*
+* Shiny Teeth App Main
+*/
+
 /* eslint-disable linebreak-style */
+
 // Import Express using commonjs
 const express = require('express')
-const server = express() // Create an instance of the express class
+const server = express()
 
 // Import and configure dotenv using commonjs
-require('dotenv').config() // Require and configure dotenv package
+require('dotenv').config()
 
 // Using JSON to process the body in received requests
 server.use(express.json())
 
 // Import routes defined in our API interface
 const routes = require('./routes.js')
-server.use('/api', routes)
+server.use(routes)
 
 // Initializing connection to DB
 const db = require('./db.js')

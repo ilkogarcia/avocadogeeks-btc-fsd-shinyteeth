@@ -54,7 +54,7 @@ const hasPrivileges = async (req, res, next) => {
       case 3: {
         // Look for the user in DB according ID included in the request
         const user = await tbl_User.findByPk(req.userId, {
-          attributes: ['professional_id']
+          attributes: ['id', 'professional_id']
         })
         // Request will be denied if user not found
         if (!user) {
@@ -63,6 +63,13 @@ const hasPrivileges = async (req, res, next) => {
             message: 'Unauthorized! - User do not exist'
           })
         }
+        // // Restrict access to personal information
+        // if (user.id !== parseInt(req.params.id)) {
+        //   return res.status(401).json({
+        //     sucess: false,
+        //     message: 'Unauthorized! - Information not available to you.'
+        //   })
+        // }
         // Request will be denied if no reference to the professional record is found.
         if (user.professional_id === null) {
           return res.status(401).json({

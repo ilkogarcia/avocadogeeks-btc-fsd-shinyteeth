@@ -2,9 +2,6 @@
 const { Router } = require('express')
 const router = Router()
 
-// API main
-router.get('/', (req, res) => res.send('Welcome to Shiny Teeth'))
-
 // Authentication and Authorization Endpoints
 const authRoutes = require('./routes/routes.auth')
 router.use(authRoutes)
@@ -20,5 +17,14 @@ router.use(dentSpecRoutes)
 // Patient management API
 const patientRoutes = require('./routes/routes.patient')
 router.use(patientRoutes)
+
+// Professional management API
+const professionalRoutes = require('./routes/routes.professionals')
+router.use(professionalRoutes)
+
+// API main
+router.get('/api', async (req, res) => {
+  return res.json({ message: 'Hello, Wellcom to Shiny Teeth ✌️' })
+})
 
 module.exports = router
