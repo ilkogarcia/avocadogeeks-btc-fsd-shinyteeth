@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       tbl_Patient.hasOne(models.tbl_User, {
         foreignKey: 'id'
       })
+      tbl_Patient.hasMany(models.tbl_Appointment, {
+        foreignKey: 'id'
+      })
     }
   }
 

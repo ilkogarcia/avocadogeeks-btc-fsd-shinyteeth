@@ -11,8 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       // define association here
       tbl_Professional.belongsTo(models.tbl_User)
-
-      tbl_Professional.belongsTo(models.tbl_DentalSpecialties, {
+      tbl_Professional.belongsTo(models.tbl_DentalSpecialties)
+      tbl_Professional.hasMany(models.tbl_Schedule, {
+        foreignKey: 'id'
+      })
+      tbl_Professional.hasMany(models.tbl_Appointment, {
         foreignKey: 'id'
       })
     }
