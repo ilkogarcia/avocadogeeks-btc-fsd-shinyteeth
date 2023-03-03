@@ -24,13 +24,6 @@ const hasPrivileges = async (req, res, next) => {
         const user = await tbl_User.findByPk(req.userId, {
           attributes: ['id', 'patient_id']
         })
-        // Request will be denied if user not found
-        if (!user) {
-          return res.status(401).json({
-            sucess: false,
-            message: 'Unauthorized! - User do not exist'
-          })
-        }
         // Restrict access to personal information
         if (user.id !== parseInt(req.params.id)) {
           return res.status(401).json({
@@ -56,13 +49,6 @@ const hasPrivileges = async (req, res, next) => {
         const user = await tbl_User.findByPk(req.userId, {
           attributes: ['id', 'professional_id']
         })
-        // Request will be denied if user not found
-        if (!user) {
-          return res.status(401).json({
-            sucess: false,
-            message: 'Unauthorized! - User do not exist'
-          })
-        }
         // // Restrict access to personal information
         // if (user.id !== parseInt(req.params.id)) {
         //   return res.status(401).json({

@@ -6,7 +6,7 @@
 
 /* eslint-disable camelcase */
 
-// Import patient Sequelize DB model
+// Import user Sequelize DB model
 const { tbl_User } = require('../models')
 
 // Function that checks if token belongs to a user that also is patient
@@ -24,14 +24,6 @@ const isProfessional = async (req, res, next) => {
     const response = await tbl_User.findByPk(req.userId, {
       attributes: ['professional_id']
     })
-
-    // Request will be denied if user not found
-    if (!response) {
-      return res.status(401).json({
-        sucess: false,
-        message: 'Unauthorized! - User not found'
-      })
-    }
 
     // Request will be denied if no reference to the patient record is found.
     if (response.professional_id === null) {

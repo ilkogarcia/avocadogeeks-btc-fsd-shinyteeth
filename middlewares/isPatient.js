@@ -25,14 +25,6 @@ const isPatient = async (req, res, next) => {
       attributes: ['patient_id']
     })
 
-    // Request will be denied if user not found
-    if (!response) {
-      return res.status(401).json({
-        sucess: false,
-        message: 'Unauthorized! - User not found'
-      })
-    }
-
     // Request will be denied if no reference to the patient record is found.
     if (response.patient_id === null) {
       return res.status(401).json({

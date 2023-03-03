@@ -12,28 +12,39 @@ require('dotenv').config()
 // Import jsonwebtoken (JWTs) package that support authorization and information exchange
 const jwt = require('jsonwebtoken')
 
+// Import tbl_User Sequelize DB model
+const { tbl_User } = require('../models')
+
 // Middleware function that validate a JSON Web Token (JWT)
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   try {
     // Retrieve token from the request header
     const authorization = req.headers.authorization
     if (!authorization) {
       return res.status(401).json({
         sucess: false,
-        message: 'Unauthorized!'
+        message: 'Unauthorized! - Missing token.'
       })
     }
 
     // eslint-disable-next-line no-unused-vars
     const [strategy, token] = authorization.split(' ')
 
-    // Decode and verify token
+    // Decode and verify the token passed
     const decodedData = jwt.verify(token, process.env.SECRET)
 
-    // We add the user data to the request
+    // Request will be denied if user id decoded from token is not found
+    const response = await tbl_User.findByPk(decodedData.userId)
+    if (!response) {
+      return res.status(401).json({
+        sucess: false,
+        message: 'Unauthorized! - User not found'
+      })
+    }
+
+    // If everything went well, we add the user data to the request
     req.userId = decodedData.userId
     req.roleId = decodedData.roleId
-
     next()
   } catch (error) {
     switch (error.name) {
