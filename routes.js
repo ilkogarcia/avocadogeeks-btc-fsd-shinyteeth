@@ -22,6 +22,10 @@ router.use(patientRoutes)
 const professionalRoutes = require('./routes/routes.professionals')
 router.use(professionalRoutes)
 
+// Appointment management API
+const appointmentRoutes = require('./routes/routes.appointments')
+router.use(appointmentRoutes)
+
 // API main
 router.get('/api', async (req, res) => {
   return res.json({ message: 'Hello, Wellcom to Shiny Teeth ✌️' })

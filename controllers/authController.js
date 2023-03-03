@@ -75,11 +75,12 @@ module.exports = class AuthCtrl {
       const token = jwt.sign(
         {
           userId: user.id,
-          email: user.email,
-          roleId: user.role_id
+          roleId: user.role_id,
+          patientId: user.patient_id,
+          professionalId: user.professional_id
         },
         process.env.SECRET,
-        { expiresIn: '1h' }
+        { expiresIn: '2h' }
       )
 
       return res.status(201).json({
