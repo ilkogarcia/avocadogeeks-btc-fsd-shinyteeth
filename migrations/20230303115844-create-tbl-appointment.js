@@ -28,7 +28,7 @@ module.exports = {
       treatment_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'tbl_DentalSpecialties',
+          model: 'tbl_DentalTreatment',
           key: 'id'
         }
       },
