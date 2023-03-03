@@ -14,14 +14,14 @@ module.exports = {
       profesional_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'tbl_Professional',
+          model: 'tbl_Professionals',
           key: 'id'
         }
       },
       appointment_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'tbl_Appointment',
+          model: 'tbl_Appointments',
           key: 'id'
         }
       },

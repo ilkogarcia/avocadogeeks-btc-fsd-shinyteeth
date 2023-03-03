@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       tbl_DentalSpecialties.hasMany(models.tbl_Professional, {
         foreignKey: 'id'
       })
-      tbl_DentalSpecialties.hasOne(models.tbl_DentalTreatment)
+      tbl_DentalSpecialties.hasMany(models.tbl_DentalTreatment, {
+        foreignKey: 'id'
+      })
     }
   }
 

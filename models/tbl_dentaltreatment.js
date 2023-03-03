@@ -1,9 +1,6 @@
-'use strict'
 /* eslint-disable camelcase */
-
-const {
-  Model
-} = require('sequelize')
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class tbl_DentalTreatment extends Model {
     /**
@@ -13,9 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       // define association here
-      tbl_DentalTreatment.belongsTo(models.tbl_DentalSpecialties, {
-        foreignKey: 'id'
-      })
+      tbl_DentalTreatment.belongsTo(models.tbl_DentalSpecialties)
       tbl_DentalTreatment.hasMany(models.tbl_Appointment, {
         foreignKey: 'id'
       })
