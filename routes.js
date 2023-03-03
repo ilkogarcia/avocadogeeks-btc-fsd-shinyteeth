@@ -21,4 +21,8 @@ router.use(dentSpecRoutes)
 const patientRoutes = require('./routes/routes.patient')
 router.use(patientRoutes)
 
+// Professional management API
+const professionalRoutes = require('./routes/routes.professional404')
+router.use(professionalRoutes)
+
 module.exports = router
