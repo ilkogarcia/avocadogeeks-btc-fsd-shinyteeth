@@ -30,13 +30,13 @@ module.exports = class UserCtrl {
 
       return res.status(201).json({
         sucess: true,
-        message: 'User added successfully!',
+        message: 'Sucess! - User added successfully!',
         user: response.id
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error: error.message
       })
     }
@@ -55,17 +55,16 @@ module.exports = class UserCtrl {
         mobile_phone: req.body.mobile_phone,
         email: req.body.email,
         password_hash: req.body.password_hash
-      }, { where: { id: req.params.id } })
-
+      }, { where: { id: req.userId } })
       return res.status(201).json({
         sucess: true,
-        message: 'User updated successfully!',
+        message: 'Sucess! - User updated successfully.',
         user: response.id
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error: error.message
       })
     }
@@ -77,23 +76,21 @@ module.exports = class UserCtrl {
       const response = await tbl_User.findByPk(req.params.id, {
         attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt']
       })
-
       if (!response) {
         return res.status(404).json({
           sucess: false,
-          message: 'User does not exist in database!'
+          message: 'Sorry! - User does not exist in database.'
         })
       }
-
       return res.status(201).json({
         sucess: true,
-        message: 'User retrieved successfully!',
+        message: 'Sucess! - User retrieved successfully.',
         user: response
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error: error.message
       })
     }
@@ -102,21 +99,21 @@ module.exports = class UserCtrl {
   // CRUD: (D) Delete from database the user record. The user ID received in request parameter
   static async apiDeleteUser (req, res) {
     try {
-      const response = await tbl_User.destroy({ where: { id: req.params.id } })
+      const response = await tbl_User.destroy({ where: { id: req.userId } })
       if (!response) {
         return res.status(404).json({
           sucess: false,
-          message: 'User does not exist in database!'
+          message: 'Sorry! - User does not exist in database.'
         })
       }
       return res.status(201).json({
         sucess: true,
-        message: 'User deleted successfully!'
+        message: 'Sucess! - User deleted successfully.'
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error: error.message
       })
     }
@@ -130,23 +127,21 @@ module.exports = class UserCtrl {
         attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt'],
         where: { role_id: { [Op.ne]: 4 } }
       })
-
       if (!response) {
         return res.status(404).json({
           sucess: false,
-          message: 'There are no registered users at this time!'
+          message: 'Sorry! - There are no registered users at this time!'
         })
       }
-
       return res.status(201).json({
         sucess: true,
-        message: 'Some users info recovered successfully!',
+        message: 'Sucess! - Some users info recovered successfully!',
         user_list: response
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error: error.message
       })
     }
