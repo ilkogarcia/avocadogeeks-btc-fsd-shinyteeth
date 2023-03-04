@@ -13,7 +13,7 @@ const ProfessionalCtrl = require('../controllers/professionalsController')
 
 // Import middleware functions
 const verifyToken = require('../middlewares/verifyToken')
-const isAdmin = require('../middlewares/isAdmin')
+//const isAdmin = require('../middlewares/isAdmin')
 const hasPrivileges = require('../middlewares/hasPrivileges')
 
 /*
