@@ -1,4 +1,12 @@
+/*
+* The DentSpecCtrl controller class is responsible for processing
+* HTTP requests received on professional RESTful endpoints of our API
+* and returns the responses to the client in JSON format.
+*/
+
 /* eslint-disable camelcase */
+
+// In this section we declare the necessary imports for this module
 const { tbl_DentalSpecialties } = require('../models/index')
 module.exports = class DentSpeCtrl {
   // CRUD: (C) Create a new Dental Specialtie record in the database. Data passed in body request
