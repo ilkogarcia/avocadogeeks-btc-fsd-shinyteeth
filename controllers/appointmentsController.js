@@ -54,9 +54,10 @@ module.exports = class AppointmentCtrl {
   // Get the list of future appointments
   static async apiGetAllAppointments (req, res) {
     try {
+      // Searches all the appointments of the patient in the database
       const response = await tbl_Appointment.findAll({
-        order: [['appointment_on', 'ASC']],
-        where: { id: req.patientID }
+        where: { patient_id: req.patientId },
+        order: [['appointment_on', 'ASC']]
       })
 
       if (!response) {

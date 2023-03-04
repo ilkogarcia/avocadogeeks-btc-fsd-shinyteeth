@@ -1,9 +1,7 @@
 'use strict'
 /* eslint-disable camelcase */
 
-const {
-  Model
-} = require('sequelize')
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class tbl_Appointment extends Model {
     /**
@@ -12,10 +10,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // define association here
-      tbl_Appointment.belongsTo(models.tbl_Patient)
-      tbl_Appointment.belongsTo(models.tbl_Professional)
-      tbl_Appointment.belongsTo(models.tbl_DentalTreatment)
+      // Associations with other entity models...
+      tbl_Appointment.belongsTo(models.tbl_Patient, {
+        foreignKey: 'id'
+      })
+
+      tbl_Appointment.belongsTo(models.tbl_Professional, {
+        foreignKey: 'id'
+      })
+
+      tbl_Appointment.belongsTo(models.tbl_DentalTreatment, {
+        foreignKey: 'id'
+      })
+
       tbl_Appointment.hasMany(models.tbl_Schedule, {
         foreignKey: 'id'
       })

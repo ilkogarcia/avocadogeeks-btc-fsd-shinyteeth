@@ -1,5 +1,6 @@
-/* eslint-disable camelcase */
 'use strict'
+/* eslint-disable camelcase */
+
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class tbl_Patient extends Model {
@@ -9,10 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      // define association here
+      // Associations with other entity models...
       tbl_Patient.hasOne(models.tbl_User, {
         foreignKey: 'id'
       })
+
       tbl_Patient.hasMany(models.tbl_Appointment, {
         foreignKey: 'id'
       })

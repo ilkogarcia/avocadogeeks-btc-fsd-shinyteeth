@@ -54,24 +54,28 @@ module.exports = class AuthCtrl {
       // Get user email and password from body request
       const { email, password } = req.body
 
-      // Find user with requested email
-      const user = await tbl_User.findOne({ where: { email } })
+      // Find user by email on database
+      const user = await tbl_User.findOne({
+        where: { email },
+        attributes: ['id', 'role_id', 'patient_id', 'professional_id', 'password_hash']
+      })
       if (!user) {
         return res.status(400).json({
           sucess: false,
           message: 'Something has gone wrong!'
         })
-      } else {
-        const isMatch = bcrypt.compareSync(password, user.password_hash)
-        if (!isMatch) {
-          return res.status(400).json({
-            sucess: false,
-            message: 'Something has gone wrong!'
-          })
-        }
       }
 
-      // Generate a web token with default (HMAC SHA256)
+      // Validate the supplied password
+      const isMatch = bcrypt.compareSync(password, user.password_hash)
+      if (!isMatch) {
+        return res.status(400).json({
+          sucess: false,
+          message: 'Something has gone wrong!'
+        })
+      }
+
+      // Generate a web token for future auth (HMAC SHA256)
       const token = jwt.sign(
         {
           userId: user.id,

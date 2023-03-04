@@ -31,20 +31,25 @@ const verifyToken = async (req, res, next) => {
     const [strategy, token] = authorization.split(' ')
 
     // Decode and verify the token passed
-    const decodedData = jwt.verify(token, process.env.SECRET)
+    const tokenData = jwt.verify(token, process.env.SECRET)
 
     // Request will be denied if user id decoded from token is not found
-    const response = await tbl_User.findByPk(decodedData.userId)
-    if (!response) {
+    const user = await tbl_User.findByPk(tokenData.userId)
+    if (!user) {
       return res.status(401).json({
         sucess: false,
-        message: 'Unauthorized! - User not found'
+        message: 'Unauthorized! - User not found.'
       })
     }
 
     // If everything went well, we add the user data to the request
-    req.userId = decodedData.userId
-    req.roleId = decodedData.roleId
+    console.log(tokenData)
+
+    req.userId = tokenData.userId
+    req.roleId = tokenData.roleId
+    req.patientId = tokenData.patientId
+    req.professionalId = tokenData.professionalId
+
     next()
   } catch (error) {
     switch (error.name) {
