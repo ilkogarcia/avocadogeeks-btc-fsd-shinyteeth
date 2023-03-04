@@ -44,21 +44,101 @@ module.exports = class ProfessionalCtrl {
 
   // CRUD: (U) Update a professional record in the database.
   static async apiUpdateProfessional (req, res) {
-    console.log('Estas en apiUpdateProfessional')
+    try {
+      const response = await tbl_Professional.update({
+        specialties_id: req.body.specialties_id
+      }, { where: { id: req.params.id } })
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Professional update successfully!',
+        professional: response.id
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong',
+        error: error.message
+      })
+    }
   }
 
   // CRUD: (R) Retrive professional data from database.
   static async apiGetProfessionalById (req, res) {
-    console.log('Estas en apiGetProfessionalById')
+    try {
+      const response = await tbl_Professional.findByPk(req.params.id, {
+        attributes: ['id', 'specialties_id']
+      })
+      if (!response) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'Professional does not exist in database'
+        })
+      }
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Professional retrieved successfully!',
+        professional: response
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong',
+        error: error.message
+      })
+    }
   }
 
   // CRUD: (D) Delete from database the professional record.
   static async apiDeleteProfessional (req, res) {
-    console.log('Estas en apiDeleteProfessional')
+    try {
+      const response = await tbl_Professional.destroy({ where: { id: req.params.id } })
+      if (!response) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'User does not exist in database!'
+        })
+      }
+      return res.status(201).json({
+        sucess: true,
+        message: 'User deleted successfully!'
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
+    }
   }
 
   // Available only in the backend for users with administration privileges
   static async apiGetAllProfessionals (req, res) {
-    console.log('Estas en apiGetAllProfessionals')
+    try {
+      const response = await tbl_Professional.findAll({
+        order: [['id', 'DESC']],
+        attributes: ['id', 'specialties_id']
+      })
+
+      if (!response) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'There are no registered professional at this time!'
+        })
+      }
+
+      return res.status(201).json({
+        sucess: true,
+        message: 'Some professional info recovered successfully!',
+        professional_list: response
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong!',
+        error: error.message
+      })
+    }
   }
 }
