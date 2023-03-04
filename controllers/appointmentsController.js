@@ -55,27 +55,29 @@ module.exports = class AppointmentCtrl {
   static async apiGetAllAppointments (req, res) {
     try {
       // Searches all the appointments of the patient in the database
-      const response = await tbl_Appointment.findAll({
+      const appointments = await tbl_Appointment.findAll({
         where: { patient_id: req.patientId },
         order: [['appointment_on', 'ASC']]
       })
 
-      if (!response) {
+      // Check no appointments found
+      if (appointments.length === 0) {
         return res.status(404).json({
           sucess: false,
-          message: 'You do not have future appointments!'
+          message: 'Sorry! - You do not have future appointments.'
         })
       }
 
+      // Return appoiment list
       return res.status(201).json({
         sucess: true,
-        message: 'Future appointments!',
-        user_list: response
+        message: 'Sucess! - These are the appointments that you have arranged for the future.',
+        appointments
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error
       })
     }
