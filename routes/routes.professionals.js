@@ -13,8 +13,8 @@ const ProfessionalCtrl = require('../controllers/professionalsController')
 
 // Import middleware functions
 const verifyToken = require('../middlewares/verifyToken')
-//const isAdmin = require('../middlewares/isAdmin')
-const hasPrivileges = require('../middlewares/hasPrivileges')
+// const isAdmin = require('../middlewares/isAdmin')
+// const hasPrivileges = require('../middlewares/hasPrivileges')
 
 /*
 * Endpoints. format: router.<Http-Method>(<URL:id>, <Middleware1>...<MiddlewareN>, <Controller> )
@@ -26,7 +26,7 @@ const hasPrivileges = require('../middlewares/hasPrivileges')
 * details what each route is responsible for.
 */
 router.post('/api/professionals', verifyToken, ProfessionalCtrl.apiAddProfessional)
-router.get('/api/professionals/:id', verifyToken, hasPrivileges, ProfessionalCtrl.apiGetProfessionalById)
+router.get('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiGetProfessionalById)
 router.put('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiUpdateProfessional)
 router.delete('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiDeleteProfessional)
 router.get('/api/professionals', verifyToken, ProfessionalCtrl.apiGetAllProfessionals)
