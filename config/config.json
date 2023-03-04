@@ -9,10 +9,10 @@
   },
   "test": {
     "username": "root",
-    "password": "root",
-    "database": "db_shinyteeth",
-    "host": "127.0.0.1",
-    "port": 3309,
+    "password": "2DDVVeMO8u20XJuPLwB5",
+    "database": "railway",
+    "host": "containers-us-west-152.railway.app",
+    "port": 6917,
     "dialect": "mysql"
   },
   "production": {
