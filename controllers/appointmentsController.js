@@ -140,7 +140,7 @@ module.exports = class AppointmentCtrl {
       }
       return res.status(201).json({
         sucess: true,
-        message: `Appointment id: ${req.params.id} deleted successfully.`,
+        message: `Appointment id: ${req.params.id} deleted successfully.`
       })
     } catch (error) {
       return res.status(500).json({
