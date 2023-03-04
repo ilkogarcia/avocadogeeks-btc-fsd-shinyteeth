@@ -15,7 +15,7 @@ module.exports = class AppointmentCtrl {
   static async apiAddAppointment (req, res) {
     try {
       const appointment = await tbl_Appointment.create({
-        patient_id: req.body.patient_id,
+        patient_id: req.patientId,
         professional_id: req.body.professional_id,
         treatment_id: req.body.treatment_id,
         appointment_on: req.body.appointment_on,
@@ -24,13 +24,13 @@ module.exports = class AppointmentCtrl {
       })
       return res.status(201).json({
         sucess: true,
-        message: 'Appointment added successfully!',
+        message: 'Sucess! - Appointment added successfully.',
         appointment
       })
     } catch (error) {
       return res.status(500).json({
         sucess: false,
-        message: 'Something has gone wrong!',
+        message: 'Error! - Something has gone wrong.',
         error
       })
     }
@@ -38,17 +38,117 @@ module.exports = class AppointmentCtrl {
 
   // CRUD: (U) Update an appointment record in the database.
   static async apiUpdateAppointment (req, res) {
-    console.log('Estas en apiUpdateAppointment')
+    try {
+      // Check record exists in database and user is authorized to update it
+      const appointment = await tbl_Appointment.findByPk(req.params.id)
+      if (!appointment) {
+        return res.status(404).json({
+          sucess: false,
+          message: `Appointment id: ${req.params.id} not found.`
+        })
+      }
+      if (appointment.patient_id !== req.patientId) {
+        return res.status(403).json({
+          sucess: false,
+          message: `Access id: ${req.params.id} forbidden.`
+        })
+      }
+      // We proceed to update the registry
+      const result = await tbl_Appointment.update({
+        professional_id: req.body.professional_id,
+        treatment_id: req.body.treatment_id,
+        appointment_on: req.body.appointment_on,
+        start_at: req.body.start_at,
+        end_at: req.body.end_at
+      },
+      { where: { id: req.params.id } },
+      { returning: true },
+      { plain: true })
+      if (!result) {
+        return res.status(404).json({
+          sucess: false,
+          message: `It has been impossible to update your appointment id: ${req.params.id}.`
+        })
+      }
+      return res.status(201).json({
+        sucess: true,
+        message: `Appointment id: ${req.params.id} updated successfully.`
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong. Error!',
+        error: error.message
+      })
+    }
   }
 
   // CRUD: (R) Retrive appointment data from database.
   static async apiGetAppointmentById (req, res) {
-    console.log('Estas en apiGetAppointmentById')
+    try {
+      const appointment = await tbl_Appointment.findByPk(req.params.id)
+      if (!appointment) {
+        return res.status(404).json({
+          sucess: false,
+          message: `Appointment id: ${req.params.id} not found.`
+        })
+      }
+      if (appointment.patient_id !== req.patientId) {
+        return res.status(403).json({
+          sucess: false,
+          message: `Access id: ${req.params.id} forbidden.`
+        })
+      }
+      return res.status(201).json({
+        sucess: true,
+        message: `Appointment id: ${req.params.id} successfully updated.`,
+        appointment
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong. Error!',
+        error: error.message
+      })
+    }
   }
 
   // CRUD: (D) Delete from database the appointment record.
   static async apiDeleteAppointment (req, res) {
-    console.log('Estas en apiDeleteAppointment')
+    try {
+      // Check record exists in database and user is authorized to delete it
+      const appointment = await tbl_Appointment.findByPk(req.params.id)
+      if (!appointment) {
+        return res.status(404).json({
+          sucess: false,
+          message: `Appointment id: ${req.params.id} not found.`
+        })
+      }
+      if (appointment.patient_id !== req.patientId) {
+        return res.status(403).json({
+          sucess: false,
+          message: `Access id: ${req.params.id} forbidden.`
+        })
+      }
+      // We proceed to delete the registry
+      const result = await tbl_Appointment.destroy({ where: { id: req.params.id } })
+      if (!result) {
+        return res.status(404).json({
+          sucess: false,
+          message: `It has been impossible to delete your appointment id: ${req.params.id}.`
+        })
+      }
+      return res.status(201).json({
+        sucess: true,
+        message: `Appointment id: ${req.params.id} deleted successfully.`,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Something has gone wrong. Error!',
+        error: error.message
+      })
+    }
   }
 
   // Get the list of future appointments
@@ -59,7 +159,6 @@ module.exports = class AppointmentCtrl {
         where: { patient_id: req.patientId },
         order: [['appointment_on', 'ASC']]
       })
-
       // Check no appointments found
       if (appointments.length === 0) {
         return res.status(404).json({
@@ -67,7 +166,6 @@ module.exports = class AppointmentCtrl {
           message: 'Sorry! - You do not have future appointments.'
         })
       }
-
       // Return appoiment list
       return res.status(201).json({
         sucess: true,
