@@ -1,0 +1,12 @@
+# Ignore this folders
+/db
+/node_modules
+
+# Ignore this files
+.env
+.env.example
+.gitignore
+LICENSE
+*.html
+*.md
+*.json
