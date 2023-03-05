@@ -17,7 +17,6 @@ const isPatient = require('../middlewares/isPatient')
 const isProfessional = require('../middlewares/isProfessional')
 const isAdmin = require('../middlewares/isAdmin')
 
-
 /*
 * Endpoints. format: router.<Http-Method>(<URL:id>, <Middleware1>...<MiddlewareN>, <Controller> )
 * <Http-Method> Refers to the HTTP method that route will respond to, or be invoked for.

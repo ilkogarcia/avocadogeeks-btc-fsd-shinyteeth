@@ -31,13 +31,13 @@ const hasPrivileges = async (req, res, next) => {
             message: 'Unauthorized! - Information not available to you.'
           })
         }
-        // Request will be denied if no reference to the patient record is found.
-        if (user.patient_id === null) {
-          return res.status(401).json({
-            sucess: false,
-            message: 'Unauthorized! - Patient record not found'
-          })
-        }
+        // // Request will be denied if no reference to the patient record is found.
+        // if (user.patient_id === null) {
+        //   return res.status(401).json({
+        //     sucess: false,
+        //     message: 'Unauthorized! - Patient record not found'
+        //   })
+        // }
         // If everything has gone well we add patient ID to the request
         req.patientID = user.patient_id
         next()
@@ -57,12 +57,12 @@ const hasPrivileges = async (req, res, next) => {
         //   })
         // }
         // Request will be denied if no reference to the professional record is found.
-        if (user.professional_id === null) {
-          return res.status(401).json({
-            sucess: false,
-            message: 'Unauthorized! - Professional record not found'
-          })
-        }
+        // if (user.professional_id === null) {
+        //   return res.status(401).json({
+        //     sucess: false,
+        //     message: 'Unauthorized! - Professional record not found'
+        //   })
+        // }
         // If everything has gone well we add professional ID to the request
         req.professionalID = user.professional_id
         next()
