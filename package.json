@@ -1,0 +1,40 @@
+{
+  "name": "avocadogeeks-btc-fsd-shinyteeth",
+  "version": "1.0.0",
+  "description": "API REST for \"Shiny Teeth\" dental clinic. Made by Avocado Geeks",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "lint": "eslint .",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth/issues"
+  },
+  "homepage": "https://github.com/ilkogarcia/avocadogeeks-btc-fsd-shinyteeth#readme",
+  "dependencies": {
+    "bcrypt": "5.1.0",
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "jsonwebtoken": "9.0.0",
+    "mysql2": "3.1.2",
+    "nodemon": "2.0.20",
+    "sequelize": "6.29.0"
+  },
+  "devDependencies": {
+    "prettier": "2.8.4",
+    "sequelize-cli": "6.6.0",
+    "standard": "17.0.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
+}
