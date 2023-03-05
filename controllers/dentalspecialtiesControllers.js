@@ -1,6 +1,6 @@
 /*
 * The DentSpecCtrl controller class is responsible for processing
-* HTTP requests received on professional RESTful endpoints of our API
+* HTTP requests received on dental specialties RESTful endpoints of our API
 * and returns the responses to the client in JSON format.
 */
 
@@ -8,6 +8,8 @@
 
 // In this section we declare the necessary imports for this module
 const { tbl_DentalSpecialties } = require('../models/index')
+
+// Controller class DentSpeCtrl
 module.exports = class DentSpeCtrl {
   // CRUD: (C) Create a new Dental Specialtie record in the database. Data passed in body request
   static async apiAddDentSpec (req, res) {
@@ -54,7 +56,7 @@ module.exports = class DentSpeCtrl {
     }
   }
 
-  // CRUD: (R) Retrive DentalSpecialties data from database. The user ID received in request parameter
+  // CRUD: (R) Retrive DentalSpecialties data from database. The dental specialti ID received in request parameter
   static async apiGetDentSpecById (req, res) {
     try {
       const response = await tbl_DentalSpecialties.findByPk(req.params.id, {
@@ -104,7 +106,7 @@ module.exports = class DentSpeCtrl {
     }
   }
 
-  // Testing Method
+  // This method is available only in the backend and for users with administration privileges
   static async apiGetAllDentSpec (req, res) {
     try {
       const dentSpecList = await tbl_DentalSpecialties.findAll({
