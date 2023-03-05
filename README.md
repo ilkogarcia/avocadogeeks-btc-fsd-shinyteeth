@@ -32,10 +32,6 @@ Technologies:
 <div align="center">
 <a href="https://www.mysql.com/">
     <img src= "https://img.shields.io/badge/mysql-3E6E93?style=for-the-badge&logo=mysql&logoColor=white"/>
-</a>
-<a href="https://www.mysql.com/"> 
-    <img src= ""/> 
-</a>
 <a href="https://www.expressjs.com/">
     <img src= "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
 </a>
@@ -49,7 +45,7 @@ Technologies:
 
 
 ## Diagram DB
-!['imagen-db'](./images/sampleDb.png)
+![image](https://user-images.githubusercontent.com/122813777/222984254-ce404dc5-8d44-4d41-abcd-830ff68e0e0b.png)
 
 ## local installation
 1. We need to have NodeJS installed
