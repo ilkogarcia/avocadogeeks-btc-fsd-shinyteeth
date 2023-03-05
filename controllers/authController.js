@@ -83,7 +83,7 @@ module.exports = class AuthCtrl {
           patientId: user.patient_id,
           professionalId: user.professional_id
         },
-        process.env.SECRET,
+        'gh2qtMsF774X6YVVtKmZl1NHoeNPK6D3',
         { expiresIn: '2h' }
       )
 

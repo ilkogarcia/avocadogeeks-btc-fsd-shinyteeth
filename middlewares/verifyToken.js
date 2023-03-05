@@ -31,7 +31,7 @@ const verifyToken = async (req, res, next) => {
     const [strategy, token] = authorization.split(' ')
 
     // Decode and verify the token passed
-    const tokenData = jwt.verify(token, process.env.SECRET)
+    const tokenData = jwt.verify(token, 'gh2qtMsF774X6YVVtKmZl1NHoeNPK6D3')
 
     // Request will be denied if user id decoded from token is not found
     const user = await tbl_User.findByPk(tokenData.userId)
