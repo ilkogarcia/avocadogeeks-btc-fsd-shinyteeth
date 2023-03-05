@@ -2,12 +2,12 @@ const config = require('./config/config.json')
 const { Sequelize } = require('sequelize')
 
 const sequelize = new Sequelize(
-  process.env.MYSQL_DATABASE || config.test.database,
-  process.env.MYSQL_USER || config.test.username,
-  process.env.MYSQL_PASSWORD || config.test.password,
+  process.env.MYSQL_DATABASE || config.development.database,
+  process.env.MYSQL_USER || config.development.username,
+  process.env.MYSQL_PASSWORD || config.development.password,
   {
-    host: process.env.MYSQL_HOST || config.test.host,
-    port: process.env.MYSQL_PORT || config.test.port || '3309',
+    host: process.env.MYSQL_HOST || config.development.host,
+    port: process.env.MYSQL_PORT || config.development.port || '3309',
     dialect: 'mysql',
     operatorAliases: false,
     pool: {
