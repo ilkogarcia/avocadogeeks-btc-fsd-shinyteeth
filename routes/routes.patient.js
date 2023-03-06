@@ -26,10 +26,10 @@ const isAdmin = require('../middlewares/isAdmin')
 * details what each route is responsible for.
 */
 
-router.post('/api/patient', verifyToken, isProfessional, PatientCtrl.apiAddPatient)
-router.get('/api/patient/:id', verifyToken, PatientCtrl.apiGetPatientById)
-router.put('/api/patient/:id', verifyToken, isProfessional, PatientCtrl.apiUpdatePatient)
-router.delete('/api/patient/:id', verifyToken, isAdmin, PatientCtrl.apiDeletePatient)
-router.get('/api/patient', verifyToken, isAdmin, PatientCtrl.apiGetAllPatient)
+router.post('/api/patients/', verifyToken, isProfessional, PatientCtrl.apiAddPatient)
+router.get('/api/patients/:id', verifyToken, PatientCtrl.apiGetPatientById)
+router.put('/api/patients/:id', verifyToken, isProfessional, PatientCtrl.apiUpdatePatient)
+router.delete('/api/patients/:id', verifyToken, isAdmin, PatientCtrl.apiDeletePatient)
+router.get('/api/patients/', verifyToken, isAdmin, PatientCtrl.apiGetAllPatient)
 
 module.exports = router

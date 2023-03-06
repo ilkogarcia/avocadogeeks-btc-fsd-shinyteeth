@@ -180,9 +180,11 @@ module.exports = class AppointmentCtrl {
   static async apiGetAllAppointments (req, res) {
     try {
       // Searches all the appointments of the patient in the database
+      console.log('Hemos llegado al método de controlador apiGetAllAppointments')
+
       const appointments = await tbl_Appointment.findAll({
-        where: { patient_id: req.patientId },
-        order: [['appointment_on', 'ASC']]
+        order: [['appointment_on', 'ASC']],
+        where: { patient_id: req.patientId }
       })
       // Check no appointments found
       if (appointments.length === 0) {

@@ -43,7 +43,7 @@ const verifyToken = async (req, res, next) => {
     }
 
     // If everything went well, we add the user data to the request
-    console.log(tokenData)
+    // console.log(tokenData)
 
     req.userId = tokenData.userId
     req.roleId = tokenData.roleId
