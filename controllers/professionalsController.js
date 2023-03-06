@@ -14,7 +14,7 @@ module.exports = class ProfessionalCtrl {
   // CRUD: (C) Create a new professional record in the database. Data passed in body request
   static async apiAddProfessional (req, res) {
     try {
-      // Before adding rofessional verify medical specialty passed is valid.
+      // Before adding professional verify medical specialty passed is valid.
       const specialties = await tbl_DentalSpecialties.findByPk(req.body.specialties_id)
       if (!specialties) {
         return res.status(404).json({
@@ -45,6 +45,7 @@ module.exports = class ProfessionalCtrl {
   // CRUD: (U) Update a professional record in the database.
   static async apiUpdateProfessional (req, res) {
     try {
+      // The verification record exists in the database and only the Admin is authorized to update it.
       const response = await tbl_Professional.update({
         specialties_id: req.body.specialties_id
       }, { where: { id: req.params.id } })
@@ -97,12 +98,12 @@ module.exports = class ProfessionalCtrl {
       if (!response) {
         return res.status(404).json({
           sucess: false,
-          message: 'User does not exist in database!'
+          message: 'Professional does not exist in database!'
         })
       }
       return res.status(201).json({
         sucess: true,
-        message: 'User deleted successfully!'
+        message: 'Professional deleted successfully!'
       })
     } catch (error) {
       return res.status(500).json({
@@ -113,21 +114,22 @@ module.exports = class ProfessionalCtrl {
     }
   }
 
-  // Available only in the backend for users with administration privileges
+  // This method i available only in the backend and for users with administration privileges
   static async apiGetAllProfessionals (req, res) {
     try {
+      // Search all professionals in the database.
       const response = await tbl_Professional.findAll({
         order: [['id', 'DESC']],
         attributes: ['id', 'specialties_id']
       })
-
+      // Check no professionals found
       if (!response) {
         return res.status(404).json({
           sucess: false,
           message: 'There are no registered professional at this time!'
         })
       }
-
+      // Return professioanls list
       return res.status(201).json({
         sucess: true,
         message: 'Some professional info recovered successfully!',

@@ -7,6 +7,7 @@
 /* eslint-disable camelcase */
 
 // Section where we declare the necessary imports for this module
+const { tbl_Appointment } = require('../models/index')
 const AppointmentService = require('../services/appointmentsService')
 
 // Controller class AppointmentCtrl
