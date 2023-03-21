@@ -34,11 +34,21 @@ module.exports = class AuthCtrl {
         })
       }
 
+      // Generate a web token for future auth (HMAC SHA256)
+      const token = jwt.sign(
+        {
+          userId: user.id,
+          roleId: user.role_id
+        },
+        process.env.SECRET,
+        { expiresIn: '6h' }
+      )
+
       // Put together the answer that we are going to return
       return res.status(201).json({
         sucess: true,
         message: 'Signup successfully!',
-        user: user.id
+        token
       })
     } catch (error) {
       return res.status(500).json({
@@ -85,7 +95,7 @@ module.exports = class AuthCtrl {
           professionalId: user.professional_id
         },
         process.env.SECRET,
-        { expiresIn: '2h' }
+        { expiresIn: '6h' }
       )
 
       return res.status(201).json({
