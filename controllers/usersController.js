@@ -55,7 +55,7 @@ module.exports = class UserCtrl {
         mobile_phone: req.body.mobile_phone,
         email: req.body.email,
         password_hash: req.body.password_hash
-      }, { where: { id: req.userId } })
+      }, { where: { id: req.params.id } })
       return res.status(201).json({
         sucess: true,
         message: 'Sucess! - User updated successfully.',
