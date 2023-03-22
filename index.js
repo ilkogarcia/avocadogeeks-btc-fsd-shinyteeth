@@ -20,7 +20,7 @@ server.use(express.json())
 
 // Import routes defined in our API interface
 const routes = require('./routes.js')
-server.use(routes)
+server.use('/api', routes)
 
 // Initializing connection to DB
 const db = require('./db.js')

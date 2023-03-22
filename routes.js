@@ -14,6 +14,10 @@ router.use(userRoutes)
 const dentSpecRoutes = require('./routes/routes.dentalspecialties')
 router.use(dentSpecRoutes)
 
+// DentalTreatments management API
+const dentTreatRoutes = require('./routes/routes.dentaltreatments')
+router.use(dentTreatRoutes)
+
 // Patient management API
 const patientRoutes = require('./routes/routes.patient')
 router.use(patientRoutes)
@@ -27,8 +31,8 @@ const appointmentRoutes = require('./routes/routes.appointments')
 router.use(appointmentRoutes)
 
 // API main
-router.get('/api', async (req, res) => {
-  return res.json({ message: 'Hello, Wellcom to Shiny Teeth ✌️' })
+router.get('/', async (req, res) => {
+  return res.json({ message: 'Hello, Welcome to Shiny Teeth ✌️' })
 })
 
 module.exports = router
