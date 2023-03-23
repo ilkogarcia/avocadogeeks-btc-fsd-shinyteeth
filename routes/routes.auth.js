@@ -25,15 +25,15 @@ const verifyToken = require('../middlewares/verifyToken')
 */
 
 // Users (patients) selfservice registration first step
-router.post('/api/signup', AuthCtrl.signUp)
+router.post('/signup', AuthCtrl.signUp)
 
 // Users (patients) login process
-router.post('/api/signin', AuthCtrl.signIn)
+router.post('/signin', AuthCtrl.signIn)
 
 // Users (patients) update profile process
-router.put('/api/updateprofile', verifyToken, AuthCtrl.updateProfile)
+router.put('/updateprofile', verifyToken, AuthCtrl.updateProfile)
 
 // Users (patients) password reset process.
-router.put('/api/resetpass', verifyToken, AuthCtrl.resetPassword)
+router.put('/resetpass', verifyToken, AuthCtrl.resetPassword)
 
 module.exports = router

@@ -25,10 +25,11 @@ const verifyToken = require('../middlewares/verifyToken')
 * <Controller> Refers to the name of the route method in the controller. Most indicate purpose
 * details what each route is responsible for.
 */
-router.post('/api/professionals', verifyToken, ProfessionalCtrl.apiAddProfessional)
-router.get('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiGetProfessionalById)
-router.put('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiUpdateProfessional)
-router.delete('/api/professionals/:id', verifyToken, ProfessionalCtrl.apiDeleteProfessional)
-router.get('/api/professionals', verifyToken, ProfessionalCtrl.apiGetAllProfessionals)
+router.post('/professionals', verifyToken, ProfessionalCtrl.apiAddProfessional)
+router.get('/professionals/:id', verifyToken, ProfessionalCtrl.apiGetProfessionalById)
+router.put('/professionals/:id', verifyToken, ProfessionalCtrl.apiUpdateProfessional)
+router.delete('/professionals/:id', verifyToken, ProfessionalCtrl.apiDeleteProfessional)
+router.get('/professionals', verifyToken, ProfessionalCtrl.apiGetAllProfessionals)
+router.post('/professionals/user/', verifyToken, ProfessionalCtrl.apiGetProfessionalUserData)
 
 module.exports = router

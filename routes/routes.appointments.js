@@ -28,24 +28,24 @@ const isAdmin = require('../middlewares/isAdmin')
 */
 
 // Appointments endpoints available for patients
-router.post('/api/patient/appointments', verifyToken, isPatient, AppointmentsCtrl.apiAddAppointment)
-router.get('/api/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiGetAppointmentById)
-router.put('/api/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiUpdateAppointment)
-router.delete('/api/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiDeleteAppointment)
-router.get('/api/patient/appointments', verifyToken, isPatient, AppointmentsCtrl.apiGetAllAppointments)
+router.post('/patient/appointments', verifyToken, isPatient, AppointmentsCtrl.apiAddAppointment)
+router.get('/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiGetAppointmentById)
+router.put('/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiUpdateAppointment)
+router.delete('/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiDeleteAppointment)
+router.get('/patient/appointments', verifyToken, isPatient, AppointmentsCtrl.apiGetAllAppointments)
 
 // Appointments endpoints available for professionals
-router.post('/api/professional/appointments', verifyToken, isProfessional, AppointmentsCtrl.apiAddAppointment)
-router.get('/api/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiGetAppointmentById)
-router.put('/api/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiUpdateAppointment)
-router.delete('/api/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiDeleteAppointment)
-router.get('/api/professional/appointments', verifyToken, isProfessional, AppointmentsCtrl.apiGetAllAppointments)
+router.post('/professional/appointments', verifyToken, isProfessional, AppointmentsCtrl.apiAddAppointment)
+router.get('/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiGetAppointmentById)
+router.put('/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiUpdateAppointment)
+router.delete('/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiDeleteAppointment)
+router.get('/professional/appointments', verifyToken, isProfessional, AppointmentsCtrl.apiGetAllDocAppointments)
 
 // Appointments endpoints available for administrators
-router.post('/api/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiAddAppointment)
-router.get('/api/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiGetAppointmentById)
-router.put('/api/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiUpdateAppointment)
-router.delete('/api/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiDeleteAppointment)
-router.get('/api/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiGetAllAppointments)
+router.post('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiAddAppointment)
+router.get('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiGetAppointmentById)
+router.put('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiUpdateAppointment)
+router.delete('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiDeleteAppointment)
+router.get('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiGetAllDocAppointments)
 
 module.exports = router

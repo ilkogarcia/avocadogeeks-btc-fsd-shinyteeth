@@ -34,6 +34,7 @@ const isPatient = async (req, res, next) => {
     }
 
     // If everything has gone well we add patient ID to the request
+    // console.log(`User is the patient with id: ${response.patient_id}`)
     req.patientID = response.patient_id
 
     next()

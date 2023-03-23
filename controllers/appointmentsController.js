@@ -7,6 +7,7 @@
 /* eslint-disable camelcase */
 
 // Section where we declare the necessary imports for this module
+const { tbl_Appointment } = require('../models/index')
 const AppointmentService = require('../services/appointmentsService')
 
 // Controller class AppointmentCtrl
@@ -179,9 +180,43 @@ module.exports = class AppointmentCtrl {
   static async apiGetAllAppointments (req, res) {
     try {
       // Searches all the appointments of the patient in the database
+      console.log('Hemos llegado al método de controlador apiGetAllAppointments')
+
       const appointments = await tbl_Appointment.findAll({
-        where: { patient_id: req.patientId },
-        order: [['appointment_on', 'ASC']]
+        order: [['appointment_on', 'ASC']],
+        where: { patient_id: req.patientId }
+      })
+      // Check no appointments found
+      if (appointments.length === 0) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'Sorry! - You do not have future appointments.'
+        })
+      }
+      // Return appoiment list
+      return res.status(201).json({
+        sucess: true,
+        message: 'Sucess! - These are the appointments that you have arranged for the future.',
+        appointments
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Error! - Something has gone wrong.',
+        error
+      })
+    }
+  }
+
+  // Get the list of future appointments for Doctors
+  static async apiGetAllDocAppointments (req, res) {
+    try {
+      // Searches all the appointments of the patient in the database
+      console.log('Hemos llegado al método de controlador apiGetAllDocAppointments')
+
+      const appointments = await tbl_Appointment.findAll({
+        order: [['appointment_on', 'ASC']],
+        where: { professional_id: req.professionalId }
       })
       // Check no appointments found
       if (appointments.length === 0) {

@@ -55,7 +55,7 @@ module.exports = class UserCtrl {
         mobile_phone: req.body.mobile_phone,
         email: req.body.email,
         password_hash: req.body.password_hash
-      }, { where: { id: req.userId } })
+      }, { where: { id: req.params.id } })
       return res.status(201).json({
         sucess: true,
         message: 'Sucess! - User updated successfully.',
@@ -99,7 +99,7 @@ module.exports = class UserCtrl {
   // CRUD: (D) Delete from database the user record. The user ID received in request parameter
   static async apiDeleteUser (req, res) {
     try {
-      const response = await tbl_User.destroy({ where: { id: req.userId } })
+      const response = await tbl_User.destroy({ where: { id: req.params.id } })
       if (!response) {
         return res.status(404).json({
           sucess: false,
