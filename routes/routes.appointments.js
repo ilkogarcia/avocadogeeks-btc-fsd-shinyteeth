@@ -39,13 +39,13 @@ router.post('/professional/appointments', verifyToken, isProfessional, Appointme
 router.get('/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiGetAppointmentById)
 router.put('/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiUpdateAppointment)
 router.delete('/professional/appointments/:id', verifyToken, isProfessional, AppointmentsCtrl.apiDeleteAppointment)
-router.get('/professional/appointments', verifyToken, isProfessional, AppointmentsCtrl.apiGetAllAppointments)
+router.get('/professional/appointments', verifyToken, isProfessional, AppointmentsCtrl.apiGetAllDocAppointments)
 
 // Appointments endpoints available for administrators
 router.post('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiAddAppointment)
 router.get('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiGetAppointmentById)
 router.put('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiUpdateAppointment)
 router.delete('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiDeleteAppointment)
-router.get('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiGetAllAppointments)
+router.get('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiGetAllDocAppointments)
 
 module.exports = router

@@ -8,6 +8,7 @@
 
 // Section where we declare the necessary imports for this module
 const { tbl_Professional, tbl_DentalSpecialties } = require('../models/index')
+const { tbl_User } = require('../models/index')
 
 // Controller class ProfessionalCtrl
 module.exports = class ProfessionalCtrl {
@@ -139,6 +140,33 @@ module.exports = class ProfessionalCtrl {
       return res.status(500).json({
         sucess: false,
         message: 'Something has gone wrong!',
+        error: error.message
+      })
+    }
+  }
+
+  // Retrive user data from database. The user ID received in request parameter
+  static async apiGetProfessionalUserData (req, res) {
+    try {
+      const response = await tbl_User.findOne({
+        attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt'],
+        where: { professional_id: req.body.professional_id }
+      })
+      if (!response) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'Sorry! - Professional does not have user info in database'
+        })
+      }
+      return res.status(201).json({
+        sucess: true,
+        message: 'Sucess! - Professional user info retrieved successfully',
+        professional: response
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Error! - Something has gone wrong',
         error: error.message
       })
     }

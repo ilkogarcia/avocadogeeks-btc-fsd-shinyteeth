@@ -7,6 +7,7 @@
 /* eslint-disable camelcase */
 // Section where we declare the necessary imports for this module
 const { tbl_Patient } = require('../models/index')
+const { tbl_User } = require('../models/index')
 
 // Controller class PatientCtrl
 module.exports = class PatientCtrl {
@@ -101,7 +102,7 @@ module.exports = class PatientCtrl {
     }
   }
 
-  // Testing method
+  // Get all patient in database...
   static async apiGetAllPatient (req, res) {
     try {
       const response = await tbl_Patient.findAll()
@@ -115,6 +116,33 @@ module.exports = class PatientCtrl {
         sucess: true,
         message: 'Sucess! - Some Patient info recovered successfully',
         patient_list: response
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Error! - Something has gone wrong',
+        error: error.message
+      })
+    }
+  }
+
+  // Retrive user data from database. The user ID received in request parameter
+  static async apiGetPatientUserData (req, res) {
+    try {
+      const response = await tbl_User.findOne({
+        attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt'],
+        where: { patient_id: req.body.patient_id }
+      })
+      if (!response) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'Sorry! - Patient does not have user info in database'
+        })
+      }
+      return res.status(201).json({
+        sucess: true,
+        message: 'Sucess! - Patient user info retrieved successfully',
+        patient: response
       })
     } catch (error) {
       return res.status(500).json({

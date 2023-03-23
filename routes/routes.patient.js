@@ -31,5 +31,6 @@ router.get('/patients/:id', verifyToken, PatientCtrl.apiGetPatientById)
 router.put('/patients/:id', verifyToken, isProfessional, PatientCtrl.apiUpdatePatient)
 router.delete('/patients/:id', verifyToken, isAdmin, PatientCtrl.apiDeletePatient)
 router.get('/patients/', verifyToken, isAdmin, PatientCtrl.apiGetAllPatient)
+router.post('/patients/user/', verifyToken, PatientCtrl.apiGetPatientUserData)
 
 module.exports = router

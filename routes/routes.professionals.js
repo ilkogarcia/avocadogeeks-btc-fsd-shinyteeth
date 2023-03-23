@@ -30,5 +30,6 @@ router.get('/professionals/:id', verifyToken, ProfessionalCtrl.apiGetProfessiona
 router.put('/professionals/:id', verifyToken, ProfessionalCtrl.apiUpdateProfessional)
 router.delete('/professionals/:id', verifyToken, ProfessionalCtrl.apiDeleteProfessional)
 router.get('/professionals', verifyToken, ProfessionalCtrl.apiGetAllProfessionals)
+router.post('/professionals/user/', verifyToken, ProfessionalCtrl.apiGetProfessionalUserData)
 
 module.exports = router
