@@ -3,13 +3,13 @@ const { Sequelize } = require('sequelize')
 require('dotenv').config()
 
 const sequelize = new Sequelize(
-  process.env.MYSQLDATABASE || config.development.database,
-  process.env.MYSQLUSER || config.development.username,
-  process.env.MYSQLPASSWORD || config.development.password,
+  process.env.MYSQL_DATABASE || config.development.database,
+  process.env.MYSQL_USER || config.development.username,
+  process.env.MYSQL_PASSWORD || config.development.password,
   {
-    host: process.env.MYSQLHOST || config.development.host,
-    port: process.env.MYSQLPORT || config.development.port,
-    dialect: process.env.MYSQLDIALECT || config.development.dialect,
+    host: process.env.MYSQL_HOST || config.development.host,
+    port: process.env.MYSQL_PORT || config.development.port,
+    dialect: process.env.MYSQL_DIALECT || config.development.dialect,
     operatorAliases: false,
     pool: {
       max: 5, // maximum number of connection in pool
